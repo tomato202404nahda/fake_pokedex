@@ -1,16 +1,23 @@
 import { useState, useEffect } from "react";
 import Card from "../../components/card/card";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 /* import NameCard from "../../components/namecard/namecard"; */
 import axios from "axios";
 export const Main = () => {
-  const [number, setNumber] = useState(1);
+  const { state } = useLocation();
+
+  const [number, setNumber] = useState(() => {
+    if (state) {
+      return state;
+    } else {
+      return Math.floor(Math.random() * (1025 - 1) + 1);
+    }
+  });
 
   const [pokemonName, setPokemonName] = useState("");
 
   const [pokemonImage, setPokemonImage] = useState("");
 
-  const [pokemonDetails, setPokemonDetails] = useState({});
   const navigate = useNavigate();
   const URL = "https://pokeapi.co/api/v2/pokemon";
   /* const exampleStudents = [
@@ -33,7 +40,7 @@ export const Main = () => {
       const resp = await axios.get(`${URL}/${number}`);
 
       setPokemonName(resp.data.name);
-      setPokemonDetails(resp.data);
+
       return resp;
     } catch (error) {
       console.log;
@@ -73,8 +80,8 @@ export const Main = () => {
       </button>
       <br />
 
-      {
-        <Card title={pokemonName}>
+      <Card title={pokemonName}>
+        {pokemonImage != "" && (
           <div className="flex flex-row items-center">
             <button
               type="button"
@@ -136,23 +143,26 @@ export const Main = () => {
               </div>
             </button>
           </div>
-          <div className="flex flex-col p-4 gap-6 text-center">
-            <div>
-              <h3>Pokemon ID</h3>
-              <div className="mx-auto text-center max-w- md:max-w-[5vw] w-full bg-black text-slate-100">
-                {number}
-              </div>
+        )}
+        <div className="flex flex-col p-4 gap-6 text-center">
+          <div>
+            <h3>Pokemon ID</h3>
+            <div className="mx-auto text-center max-w-[20%] md:max-w-[5vw] w-full bg-black text-slate-100">
+              {number}
             </div>
-            <button
-              onClick={() => {
-                navigate("/details", { state: pokemonDetails });
-              }}
-              className="mx-auto px-4 py-2 bg-blue-600 text-white  rounded-md max-w-full md:max-w-[50%] w-full truncate md:hover:max-w-[20vw] hover:bg-black hover:scale-105 transition-all duration-300 ease-in-out "
-            >
-              Show Pokemon Details
-            </button>
           </div>
-          {/* <div className="flex flex-col p-4 gap-6 text-center ">
+          <button
+            onClick={() => {
+              navigate("/details", {
+                state: { pokeId: number, from: "main" },
+              });
+            }}
+            className="mx-auto px-4 py-2 bg-blue-600 text-white  rounded-md max-w-full md:max-w-[50%] w-full truncate md:hover:max-w-[20vw] hover:bg-black hover:scale-105 transition-all duration-300 ease-in-out "
+          >
+            Show Pokemon Details
+          </button>
+        </div>
+        {/* <div className="flex flex-col p-4 gap-6 text-center ">
              <div className="mx-auto text-center max-w-full md:max-w-[5vw] w-full bg-black text-slate-100">
               {valueNumber}
             </div>
@@ -167,8 +177,8 @@ export const Main = () => {
               Regular Let Button
             </button> 
           </div> */}
-        </Card>
-      }
+      </Card>
+
       <br />
       {
         <div className="flex flex-col gap-6 ">
