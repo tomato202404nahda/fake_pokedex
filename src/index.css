@@ -14,3 +14,22 @@
 body {
   @apply poppins;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-[#888] rounded-b;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#000] rounded-b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#555];
+}
