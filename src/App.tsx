@@ -13,6 +13,7 @@ import { Temp } from "./pages/temp/temp";
 //components
 import Header from "./components/header/Header";
 import Details from "./pages/details/Details";
+import PokemonRegistry from "./pages/pokemon-registry/pokemon-registry";
 
 function App() {
   const router = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
     {
       path: "/signin",
       element: <SignIn />,
+    },
+    {
+      path: "/list",
+      element: <PokemonRegistry />,
     },
     {
       path: "/temp",

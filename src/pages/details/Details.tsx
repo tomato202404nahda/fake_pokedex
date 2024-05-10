@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../../components/card/card";
 import axios from "axios";
+import { ApiURL } from "../../helper/const";
 
 export default function Details() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const pokeId = state.pokeId;
   const [pokemon, setPokemon] = useState(null);
-  const URL = "https://pokeapi.co/api/v2/pokemon";
+
   const requestPokemon = async () => {
     try {
-      const resp = await axios.get(`${URL}/${pokeId}`);
+      const resp = await axios.get(`${ApiURL}/${pokeId}`);
 
       setPokemon(resp.data);
       return resp;
     } catch (error) {
-      console.log;
+      return;
     }
   };
 
@@ -24,9 +25,9 @@ export default function Details() {
     requestPokemon();
   }, [pokeId]);
 
-  useEffect(() => {
-    console.log(pokemon);
-  });
+  /* useEffect(() => {
+    
+  }); */
 
   if (pokemon) {
     return (
@@ -37,9 +38,11 @@ export default function Details() {
               type="button"
               onClick={() => {
                 if (state.from === "main") {
-                  navigate("/main", { state: pokemon.id });
+                  navigate("/main", {
+                    state: { pokeId: pokeId, from: "main" },
+                  });
                 } else {
-                  navigate("/bruh");
+                  navigate("/list", { state: { pokeId: pokeId } });
                 }
               }}
               className="bg-transparent text-white rounded-l-md border-r max-h-[10%] border-gray-100 py-2 hover:bg-red-700 hover:text-white px-3"
@@ -52,9 +55,9 @@ export default function Details() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -73,9 +76,9 @@ export default function Details() {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -96,11 +99,11 @@ export default function Details() {
               <p>{pokemon.weight / 10}kg</p>
             </div>
           </Card>
-          <div className="flex flex-row gap-6 flex-wrap">
+          <div className="flex flex-row gap-6 mt-8 md:mt-0 flex-wrap">
             <Card title="Abilities">
               {Object.keys(pokemon.abilities).map((key) => {
                 return (
-                  <div className="border rounded grow">
+                  <div key={key} className="border rounded grow">
                     {pokemon.abilities[key].ability.name.toUpperCase()}
                   </div>
                 );
@@ -110,7 +113,7 @@ export default function Details() {
               <div className="max-h-[30vh] box-content overflow-y-auto">
                 {Object.keys(pokemon.moves).map((key) => {
                   return (
-                    <div className="border rounded">
+                    <div key={key} className="border rounded">
                       {pokemon.moves[key].move.name.toUpperCase()}
                     </div>
                   );

@@ -8,7 +8,7 @@ export const Main = () => {
 
   const [number, setNumber] = useState(() => {
     if (state) {
-      return state;
+      return state.pokeId;
     } else {
       return Math.floor(Math.random() * (1025 - 1) + 1);
     }
@@ -43,19 +43,19 @@ export const Main = () => {
 
       return resp;
     } catch (error) {
-      console.log;
+      return;
     }
   };
 
   const getPokemonImg = async () => {
     try {
       const resp = await axios.get(`${URL}/${number}`);
-      console.log(resp);
+
       setPokemonImage(resp.data.sprites.front_default);
       localStorage.setItem("pokemonName", resp.data.name);
       return resp;
     } catch (error) {
-      console.log(error);
+      return;
     }
   };
 
@@ -171,15 +171,22 @@ export const Main = () => {
               onClick={() => {
                 valueNumber += 1;
 
-                console.log(valueNumber);
+                
               }}
             >
               Regular Let Button
             </button> 
           </div> */}
       </Card>
-
       <br />
+      <button
+        className="mx-auto px-4 py-2 bg-blue-600 text-white  rounded-md max-w-full md:max-w-[10vw] w-full truncate md:hover:max-w-[20vw] hover:bg-black hover:scale-105 transition-all duration-300 ease-in-out "
+        onClick={() => {
+          navigate("/list");
+        }}
+      >
+        Browse Pokemon List
+      </button>
       {
         <div className="flex flex-col gap-6 ">
           {/* {exampleStudents.map((exampleStudent, i) => {
