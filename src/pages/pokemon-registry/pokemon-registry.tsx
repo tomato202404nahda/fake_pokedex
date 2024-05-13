@@ -89,8 +89,9 @@ export default function PokemonRegistry() {
       } catch (error) {
         return;
       }
+      pokeDatas.sort((a, b) => b.id - a.id);
     });
-  }, [pokemonList]);
+  }, [JSON.stringify(pokemonList)]);
 
   return (
     <>
