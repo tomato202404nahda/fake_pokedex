@@ -32,7 +32,7 @@ export default function Details() {
   if (pokemon) {
     return (
       <>
-        <div className="flex flex-col w-full text-center p-6">
+        <div className="flex flex-col bg-inherit w-full text-center p-6 dark:text-white">
           <div className="flex flex-row">
             <button
               type="button"
@@ -45,12 +45,12 @@ export default function Details() {
                   navigate("/list", { state: { pokeId: pokeId } });
                 }
               }}
-              className="bg-transparent text-white rounded-l-md border-r max-h-[10%] border-gray-100 py-2 hover:bg-red-700 hover:text-white px-3"
+              className="bg-slate-900 dark:bg-transparent text-white rounded-l-md border-r max-h-[10%] border-gray-100 dark:bg-slate-600 dark:hover:bg-slate-500 dark:border-blue-950 py-2 hover:bg-red-700 hover:text-white px-3"
             >
               <div className="flex flex-row align-middle">
                 <svg
                   className="w-5 mr-2"
-                  fill="black"
+                  fill="white"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -63,11 +63,11 @@ export default function Details() {
               </div>
             </button>
             <div className="text-center w-full">
-              <h1 className="text-4xl font-black">
+              <h1 className="text-4xl dark:text-slate-100 font-black">
                 {pokemon.name.toUpperCase()}
               </h1>
             </div>
-            <div className="bg-transparent text-white rounded-r-md py-2  px-3">
+            <div className="bg-transparent text-transparent rounded-r-md py-2  px-3">
               <div className="flex flex-row align-middle">
                 <svg
                   className="w-5 ml-2"
@@ -99,27 +99,31 @@ export default function Details() {
               <p>{pokemon.weight / 10}kg</p>
             </div>
           </Card>
-          <div className="flex flex-row gap-6 mt-8 md:mt-0 flex-wrap">
-            <Card title="Abilities">
-              {Object.keys(pokemon.abilities).map((key) => {
-                return (
-                  <div key={key} className="border rounded grow">
-                    {pokemon.abilities[key].ability.name.toUpperCase()}
-                  </div>
-                );
-              })}
-            </Card>
-            <Card title="Moves">
-              <div className="max-h-[30vh] box-content overflow-y-auto">
-                {Object.keys(pokemon.moves).map((key) => {
+          <div className="flex flex-row gap-6 mt-8 md:mt-4 gap-4 ">
+            <div className="w-full ">
+              <Card title="Abilities">
+                {Object.keys(pokemon.abilities).map((key) => {
                   return (
-                    <div key={key} className="border rounded">
-                      {pokemon.moves[key].move.name.toUpperCase()}
+                    <div key={key} className="border rounded grow">
+                      {pokemon.abilities[key].ability.name.toUpperCase()}
                     </div>
                   );
                 })}
-              </div>
-            </Card>
+              </Card>
+            </div>
+            <div className="w-full">
+              <Card title="Moves">
+                <div className="max-h-[30vh] box-content overflow-y-auto">
+                  {Object.keys(pokemon.moves).map((key) => {
+                    return (
+                      <div key={key} className="border rounded">
+                        {pokemon.moves[key].move.name.toUpperCase()}
+                      </div>
+                    );
+                  })}
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
       </>

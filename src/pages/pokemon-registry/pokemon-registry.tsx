@@ -7,9 +7,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 export default function PokemonRegistry() {
   const [pokemonList, setPokemonList] = useState([]);
   const { state } = useLocation();
-  /*  let imgList: string[] = [""]; */
-  /*  const [pokeIds, setPokeIds] = useState([]);
-  const [pokeImages, setPokeImages] = useState([]); */
   const [pokeDatas, setPokeDatas] = useState([]);
 
   const [page, setPage] = useState(1);
@@ -97,7 +94,7 @@ export default function PokemonRegistry() {
 
   return (
     <>
-      <div className="flex flex-row flex-wrap gap-8 p-8">
+      <div className="flex flex-row bg-inherit flex-wrap gap-8 p-8">
         {pokeDatas.map((p, i) => {
           return (
             <Card key={i} number={p.id} title={p.name}>
@@ -118,7 +115,7 @@ export default function PokemonRegistry() {
           );
         })}
       </div>
-      <div className="hidden md:flex flex-row justify-between px-4 md:px-8 ">
+      <div className="bg-inherit flex flex-row justify-between px-4 md:px-8 ">
         <button
           className={`${
             page === 1 ? "invisible" : ""

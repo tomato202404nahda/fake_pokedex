@@ -68,7 +68,7 @@ export const Main = () => {
   }, [number]);
 
   return (
-    <div className="flex flex-col p-4">
+    <div className="flex flex-col p-4 dark:text-white ">
       <br />
       <button
         className="mx-auto px-4 py-2 bg-blue-600 text-white  rounded-md max-w-full md:max-w-[10vw] w-full truncate md:hover:max-w-[20vw] hover:bg-black hover:scale-105 transition-all duration-300 ease-in-out "
@@ -82,7 +82,7 @@ export const Main = () => {
 
       <Card title={pokemonName}>
         {pokemonImage != "" && (
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center dark:bg-slate-600">
             <button
               type="button"
               onClick={() => {
@@ -93,7 +93,7 @@ export const Main = () => {
                   return --p;
                 });
               }}
-              className="bg-gray-800 text-white rounded-l-md border-r max-h-[10%] max-w-auto border-gray-100 py-2 hover:bg-red-700 hover:text-white px-3"
+              className="bg-gray-800 text-white rounded-l-md border-r max-h-[10%] max-w-auto border-gray-100 dark:border-slate-600 py-2 hover:bg-red-700 hover:text-white px-3"
             >
               <div className="flex flex-row align-middle">
                 <svg
@@ -103,9 +103,9 @@ export const Main = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -125,7 +125,7 @@ export const Main = () => {
                   return ++p;
                 });
               }}
-              className="bg-gray-800 text-white rounded-r-md py-2 border-l border-gray-200 hover:bg-red-700 hover:text-white px-3"
+              className="bg-gray-800 text-white rounded-r-md py-2 border-l border-gray-200 dark:border-slate-600 hover:bg-red-700 hover:text-white px-3"
             >
               <div className="flex flex-row align-middle">
                 <svg
@@ -135,16 +135,16 @@ export const Main = () => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
             </button>
           </div>
         )}
-        <div className="flex flex-col p-4 gap-6 text-center">
+        <div className="flex flex-col p-4 gap-6 text-center dark:bg-slate-600">
           <div>
             <h3>Pokemon ID</h3>
             <div className="mx-auto text-center max-w-[20%] md:max-w-[5vw] w-full bg-black text-slate-100">
@@ -162,21 +162,6 @@ export const Main = () => {
             Show Pokemon Details
           </button>
         </div>
-        {/* <div className="flex flex-col p-4 gap-6 text-center ">
-             <div className="mx-auto text-center max-w-full md:max-w-[5vw] w-full bg-black text-slate-100">
-              {valueNumber}
-            </div>
-            <button
-              className="mx-auto px-4 py-2 bg-blue-600 text-white  rounded-md max-w-full md:max-w-[7vw] w-full truncate md:hover:max-w-[20vw] hover:bg-black hover:scale-105 transition-all duration-300 ease-in-out "
-              onClick={() => {
-                valueNumber += 1;
-
-                
-              }}
-            >
-              Regular Let Button
-            </button> 
-          </div> */}
       </Card>
       <br />
       <button
