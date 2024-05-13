@@ -15,6 +15,9 @@ body {
   @apply poppins;
 }
 
+#root {
+  @apply h-screen dark:bg-indigo-950;
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
